@@ -21,6 +21,6 @@ func Debugf(logKey uint32, format string, args ...interface{}) {
 }
 
 func logTo(level uint32, logKey uint32, format string, args ...interface{}) {
-	// FIXME: Stub
+	// TODO: Stub
 	return
 }
