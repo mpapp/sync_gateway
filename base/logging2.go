@@ -20,7 +20,6 @@ func Debugf(logKey uint32, format string, args ...interface{}) {
 	logTo(LevelWarn, logKey, format, args...)
 }
 
-// TODO: How to maintain log order consistency? Lock this function?
 func logTo(level uint32, logKey uint32, format string, args ...interface{}) {
 	// FIXME: Stub
 	return
