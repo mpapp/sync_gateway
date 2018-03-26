@@ -12,12 +12,12 @@ func Warnf(logKey uint32, format string, args ...interface{}) {
 
 // Infof logs the given formatted string and args to the info log level with an optional log key.
 func Infof(logKey uint32, format string, args ...interface{}) {
-	logTo(LevelWarn, logKey, format, args...)
+	logTo(LevelInfo, logKey, format, args...)
 }
 
 // Debugf logs the given formatted string and args to the debug log level with an optional log key.
 func Debugf(logKey uint32, format string, args ...interface{}) {
-	logTo(LevelWarn, logKey, format, args...)
+	logTo(LevelDebug, logKey, format, args...)
 }
 
 func logTo(level uint32, logKey uint32, format string, args ...interface{}) {
