@@ -11,6 +11,7 @@ package auth
 
 import (
 	"encoding/json"
+	"net/http"
 
 	"github.com/coreos/go-oidc/jose"
 	"github.com/coreos/go-oidc/oidc"
@@ -24,6 +25,7 @@ type Authenticator struct {
 	bucket            base.Bucket
 	channelComputer   ChannelComputer
 	sessionCookieName string // Custom per-database session cookie name
+	sessionCookieDomains map[string]string // Custom session cookie domain per incoming request origin
 }
 
 // Interface for deriving the set of channels and roles a User/Role has access to.
@@ -51,8 +53,28 @@ func (auth *Authenticator) SessionCookieName() string {
 	return auth.sessionCookieName
 }
 
+func (auth *Authenticator) SessionCookieDomains() map[string]string {
+	return auth.sessionCookieDomains
+}
+
 func (auth *Authenticator) SetSessionCookieName(cookieName string) {
 	auth.sessionCookieName = cookieName
+}
+
+func (auth *Authenticator) SetSessionCookieDomains(cookieDomains map[string]string) {
+	auth.sessionCookieDomains = cookieDomains
+}
+
+func (auth *Authenticator) AddDomainToCookie(rq *http.Request, cookie *http.Cookie) {
+	origin := rq.Header.Get("Origin")
+	if len(origin) == 0 {
+		return
+	}
+	domain := auth.SessionCookieDomains()[origin]
+	if domain == "" {
+		return
+	}
+	cookie.Domain = domain
 }
 
 func docIDForUserEmail(email string) string {

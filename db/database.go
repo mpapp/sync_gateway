@@ -97,6 +97,7 @@ type DatabaseContextOptions struct {
 	SessionCookieName         string // Pass-through DbConfig.SessionCookieName
 	AllowConflicts            *bool  // False forbids creating conflicts
 	SendWWWAuthenticateHeader *bool  // False disables setting of 'WWW-Authenticate' header
+	SessionCookieDomains      map[string]string // Pass-through DbConfig.SessionCookieDomains
 	UseViews                  bool   // Force use of views
 }
 
@@ -547,6 +548,7 @@ func (context *DatabaseContext) Authenticator() *auth.Authenticator {
 	if context.Options.SessionCookieName != "" {
 		authenticator.SetSessionCookieName(context.Options.SessionCookieName)
 	}
+	authenticator.SetSessionCookieDomains(context.Options.SessionCookieDomains)
 	return authenticator
 }
 
