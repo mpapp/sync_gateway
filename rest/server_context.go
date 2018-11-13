@@ -654,6 +654,7 @@ func (sc *ServerContext) _getOrAddDatabaseFromConfig(config *DbConfig, useExisti
 		ImportOptions:             importOptions,
 		EnableXattr:               config.UseXattrs(),
 		SessionCookieName:         config.SessionCookieName,
+		SessionCookieDomains:      config.SessionCookieDomains,
 		AllowConflicts:            config.ConflictsAllowed(),
 		SendWWWAuthenticateHeader: config.SendWWWAuthenticateHeader,
 		UseViews:                  useViews,

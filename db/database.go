@@ -123,6 +123,7 @@ type DatabaseContextOptions struct {
 	UseViews                  bool             // Force use of views
 	DeltaSyncOptions          DeltaSyncOptions // Delta Sync Options
 	CompactInterval           uint32           // Interval in seconds between compaction is automatically ran - 0 means don't run
+	SessionCookieDomains      map[string]string // Pass-through DbConfig.SessionCookieDomains
 }
 
 type OidcTestProviderOptions struct {
@@ -661,6 +662,7 @@ func (context *DatabaseContext) Authenticator() *auth.Authenticator {
 	if context.Options.SessionCookieName != "" {
 		authenticator.SetSessionCookieName(context.Options.SessionCookieName)
 	}
+	authenticator.SetSessionCookieDomains(context.Options.SessionCookieDomains)
 	return authenticator
 }
 
