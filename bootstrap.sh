@@ -22,7 +22,7 @@ PRODUCT="sg"
 # Even when we build sg-accel, we want to grab the sync_gateway
 # repo since it includes sg-accel in it's manifest and will
 # build *both* sync gateway and sg-accel
-TARGET_REPO="https://github.com/couchbase/sync_gateway.git"
+TARGET_REPO="https://github.com/mpapp/sync_gateway.git"
 
 # By default, will run "repo init" followed by "repo sync".
 # If this is set to 1, skips "repo sync" 
@@ -95,10 +95,10 @@ parseOptions () {
 # in that case.  I have left that in for now since it enables certain testing.
 rewriteManifest () {
 
-    curl "https://raw.githubusercontent.com/couchbase/sync_gateway/$COMMIT/rewrite-manifest.sh" > rewrite-manifest.sh
+    curl "https://raw.githubusercontent.com/mpapp/sync_gateway/$COMMIT/rewrite-manifest.sh" > rewrite-manifest.sh
     chmod +x rewrite-manifest.sh
 
-    MANIFEST_URL="https://raw.githubusercontent.com/couchbase/sync_gateway/$COMMIT/manifest/default.xml"
+    MANIFEST_URL="https://raw.githubusercontent.com/mpapp/sync_gateway/$COMMIT/manifest/default.xml"
     PROJECT_NAME="sync_gateway"
 
     echo "Using manifest: $MANIFEST_URL on commit $COMMIT for project $PROJECT_NAME with username: $GITHUB_USERNAME"
